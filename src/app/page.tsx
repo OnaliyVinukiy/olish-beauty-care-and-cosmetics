@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import { ArrowRightIcon, HeartIcon, StarIcon } from "@heroicons/react/24/solid";
+import Image from "next/image";
 
 type ProductCategory = {
   id: number;
@@ -117,52 +118,82 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Floating decorative elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-40 h-40 rounded-full bg-purple-100 blur-3xl opacity-30"></div>
+        <div className="absolute bottom-40 right-20 w-60 h-60 rounded-full bg-pink-100 blur-3xl opacity-30"></div>
+        <div className="absolute top-1/3 right-1/4 w-32 h-32 rounded-full bg-amber-100 blur-3xl opacity-20"></div>
+      </div>
+
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-pink-50 to-purple-50 py-20 md:py-32 overflow-hidden">
+      <section className="relative py-20 md:py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/images/hero.png')] bg-cover bg-center bg-no-repeat opacity-48"></div>
         <div className="container mx-auto px-4">
           <motion.div
             ref={heroRef}
             initial={{ opacity: 0, y: 20 }}
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
-            className="max-w-2xl mx-auto text-center"
+            className="max-w-2xl mx-auto text-center relative z-10"
           >
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              Radiant Skin Starts Here
+            <div className="mb-6 flex justify-center">
+              <div className="relative w-32 h-32 md:w-40 md:h-40">
+                <Image
+                  src="/images/olish-logo.png"
+                  alt="Olish Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+              For a{" "}
+              <span className="text-transparent bg-clip-text bg-cyan-600">
+                Radiant Skin
+              </span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-xl text-gray-600 mb-8 max-w-lg mx-auto">
               Discover our premium collection of beauty care products crafted
               with natural ingredients for your skin's health and glow.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 rounded-full font-medium flex items-center justify-center transition-all">
-                Shop Now <ArrowRightIcon className="w-5 h-5 ml-2" />
-              </button>
-              <button className="border-2 border-gray-900 hover:bg-gray-900 hover:text-white px-8 py-3 rounded-full font-medium text-black flex items-center justify-center transition-all">
-                Learn More
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="relative bg-pink-500 hover:from-pink-600 hover:to-cyan-700 text-white px-8 py-4 rounded-full font-medium flex items-center justify-center transition-all shadow-lg hover:shadow-xl"
+              >
+                <span className="relative z-10">Explore Products</span>
+                <ArrowRightIcon className="w-5 h-5 ml-2" />
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 opacity-0 hover:opacity-100 transition-opacity -z-10 blur-md"></div>
+              </motion.button>
+              <button className="border-2 border-gray-900 hover:bg-gray-900/5 px-8 py-4 rounded-full font-medium text-black flex items-center justify-center transition-all">
+                About Olish
               </button>
             </div>
           </motion.div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent"></div>
       </section>
 
       {/* Categories Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 relative">
         <div className="container mx-auto px-4">
           <motion.div
             ref={categoriesRef}
             initial={{ opacity: 0, y: 20 }}
             animate={categoriesInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Our Collections
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <span className="relative inline-block">
+                Curated Collections
+                <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full"></span>
+              </span>
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Explore our carefully curated beauty care products designed for
-              all skin types.
+            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+              Each line is thoughtfully designed to work in harmony with your
+              skin's natural biology.
             </p>
           </motion.div>
 
@@ -171,36 +202,104 @@ const Home = () => {
               {[...Array(4)].map((_, i) => (
                 <div
                   key={i}
-                  className="bg-gray-100 rounded-xl h-80 animate-pulse"
+                  className="bg-gray-100 rounded-2xl h-96 animate-pulse"
                 ></div>
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {categories.map((category) => (
                 <motion.div
                   key={category.id}
-                  whileHover={{ y: -5 }}
-                  className="bg-white rounded-xl shadow-md overflow-hidden group cursor-pointer border border-gray-100 hover:shadow-lg transition-all"
+                  whileHover={{ y: -8 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="bg-white rounded-2xl overflow-hidden group cursor-pointer border border-gray-100 hover:shadow-xl transition-all relative"
                 >
-                  <div className="relative h-60 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent z-10"></div>
+                  <div className="relative h-80 overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent z-10"></div>
                     <img
                       src={category.image}
                       alt={category.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                     />
                     <div className="absolute bottom-0 left-0 p-6 z-20">
-                      <h3 className="text-xl font-bold text-white mb-1">
+                      <h3 className="text-2xl font-bold text-white mb-1">
                         {category.name}
                       </h3>
-                      <p className="text-gray-200">{category.description}</p>
+                      <p className="text-gray-200 text-sm">
+                        {category.description}
+                      </p>
+                      <button className="mt-3 text-sm font-medium text-white bg-black/20 hover:bg-black/30 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20 transition-all flex items-center">
+                        Explore <ArrowRightIcon className="w-4 h-4 ml-1" />
+                      </button>
                     </div>
                   </div>
                 </motion.div>
               ))}
             </div>
           )}
+        </div>
+      </section>
+
+      {/* Featured Products Section */}
+      <section className="py-16 bg-white/50 backdrop-blur-sm">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+              <span className="relative inline-block">
+                Our Bestsellers
+                <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-amber-400 to-rose-500 rounded-full"></span>
+              </span>
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+              Loved by thousands for their transformative results
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {featuredProducts.map((product) => (
+              <motion.div
+                key={product.id}
+                whileHover={{ y: -5 }}
+                className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all"
+              >
+                <div className="relative">
+                  <div className="h-64 w-full bg-gray-100 relative overflow-hidden">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    />
+                    {product.isBestSeller && (
+                      <div className="absolute top-3 left-3 bg-gradient-to-r from-amber-400 to-rose-500 text-white text-xs font-bold px-3 py-1 rounded-full flex items-center">
+                        <StarIcon className="w-3 h-3 mr-1" />
+                        Bestseller
+                      </div>
+                    )}
+                  </div>
+                  <button className="absolute top-3 right-3 p-2 bg-white/80 backdrop-blur-sm rounded-full hover:bg-white transition-all">
+                    <HeartIcon className="w-5 h-5 text-rose-500" />
+                  </button>
+                </div>
+                <div className="p-5">
+                  <h3 className="font-bold text-lg mb-1">{product.name}</h3>
+                  <p className="text-gray-500 text-sm mb-3">
+                    {product.category.replace("-", " ")}
+                  </p>
+                  <div className="flex justify-between items-center">
+                    <span className="font-bold text-gray-900">
+                      ${product.price.toFixed(2)}
+                    </span>
+                    <button className="text-sm font-medium bg-gray-900 text-white px-4 py-2 rounded-full hover:bg-gray-800 transition-all">
+                      Add to Cart
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
     </div>
