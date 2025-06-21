@@ -77,7 +77,7 @@ const Home = () => {
           id: 4,
           name: "Soaps",
           description: "Gentle cleansing for all skin types",
-          image: "/images/soap.jpg",
+          image: "/images/soap.png",
           slug: "soaps",
         },
       ];
