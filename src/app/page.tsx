@@ -36,6 +36,7 @@ const Home = () => {
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileView, setIsMobileView] = useState(false);
 
   // Animation hooks
   const [heroRef, heroInView] = useInView({
@@ -46,6 +47,22 @@ const Home = () => {
     triggerOnce: true,
     threshold: 0.1,
   });
+
+  useEffect(() => {
+    // Function to check and set mobile view
+    const checkMobileView = () => {
+      setIsMobileView(window.innerWidth <= 768);
+    };
+
+    // Set initial mobile view on component mount
+    checkMobileView();
+
+    // Add event listener for window resize
+    window.addEventListener("resize", checkMobileView);
+
+    // Clean up event listener on component unmount
+    return () => window.removeEventListener("resize", checkMobileView);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -124,6 +141,11 @@ const Home = () => {
 
     fetchData();
   }, []);
+
+  // Determine which hero image to use
+  const heroImage = isMobileView
+    ? "/images/mobile-banner.png"
+    : "/images/hero.png";
 
   return (
     <div className="min-h-screen bg-white">
@@ -261,7 +283,17 @@ const Home = () => {
 
       {/* Hero Section */}
       <section className="relative py-20 md:py-44 overflow-hidden pt-32">
-        <div className="absolute inset-0 bg-[url('/images/hero.png')] bg-cover bg-center bg-no-repeat opacity-48"></div>
+        {/* Dynamic hero image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url(${heroImage})`,
+            opacity: isMobileView ? 0.32 : 0.72,
+          }}
+        ></div>
+        {isMobileView && (
+          <div className="absolute inset-0 bg-gradient-to-b from-white-700/30 to-white-500/10"></div>
+        )}
         <div className="container mx-auto px-4">
           <motion.div
             ref={heroRef}
