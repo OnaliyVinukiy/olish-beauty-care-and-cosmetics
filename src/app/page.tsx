@@ -154,7 +154,7 @@ const Home = () => {
         <div className="container mx-auto px-2 py-3 flex justify-between items-center">
           {/* Logo */}
           <a href="#" className="flex items-center">
-            <Image
+            <img
               src="/images/olish-logo.png"
               alt="Olish Logo"
               width={40}
@@ -304,12 +304,10 @@ const Home = () => {
           >
             <div className="mb-6 flex justify-center">
               <div className="relative w-32 h-32 md:w-40 md:h-40">
-                <Image
+                <img
                   src="/images/olish-logo.png"
                   alt="Olish Logo"
-                  fill
                   className="object-contain"
-                  priority
                 />
               </div>
             </div>
@@ -321,7 +319,7 @@ const Home = () => {
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-lg mx-auto">
               Discover our premium collection of beauty care products crafted
-              with natural ingredients for your skin's health and glow.
+              with natural ingredients for your skin&#39;s health and glow.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.button
@@ -359,7 +357,7 @@ const Home = () => {
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto text-lg">
               Each line is thoughtfully designed to work in harmony with your
-              skin's natural biology.
+              skin&#39;s natural biology.
             </p>
           </motion.div>
 
