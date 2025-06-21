@@ -3,7 +3,15 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { ArrowRightIcon, HeartIcon, StarIcon } from "@heroicons/react/24/solid";
+import {
+  ArrowRightIcon,
+  HeartIcon,
+  StarIcon,
+  Bars3Icon,
+  XMarkIcon,
+  ShoppingCartIcon,
+  MagnifyingGlassIcon,
+} from "@heroicons/react/24/solid";
 import Image from "next/image";
 
 type ProductCategory = {
@@ -27,6 +35,7 @@ const Home = () => {
   const [categories, setCategories] = useState<ProductCategory[]>([]);
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Animation hooks
   const [heroRef, heroInView] = useInView({
@@ -118,6 +127,131 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Navigation Bar */}
+      <nav className="fixed w-full top-0 z-50 bg-white/80 backdrop-blur-md shadow-sm">
+        <div className="container mx-auto px-2 py-3 flex justify-between items-center">
+          {/* Logo */}
+          <a href="#" className="flex items-center">
+            <Image
+              src="/images/olish-logo.png"
+              alt="Olish Logo"
+              width={40}
+              height={40}
+              className="object-contain"
+            />
+            <span className="ml-2 text-xl font-semibold text-gray-800">
+              OLISH
+            </span>
+          </a>
+
+          {/* Desktop Menu */}
+          <div className="hidden md:flex space-x-6">
+            <a
+              href="#"
+              className="text-gray-600 hover:text-pink-500 transition-colors font-medium"
+            >
+              Home
+            </a>
+            <a
+              href="#"
+              className="text-gray-600 hover:text-pink-500 transition-colors font-medium"
+            >
+              Products
+            </a>
+            <a
+              href="#"
+              className="text-gray-600 hover:text-pink-500 transition-colors font-medium"
+            >
+              Categories
+            </a>
+            <a
+              href="#"
+              className="text-gray-600 hover:text-pink-500 transition-colors font-medium"
+            >
+              About
+            </a>
+            <a
+              href="#"
+              className="text-gray-600 hover:text-pink-500 transition-colors font-medium"
+            >
+              Contact
+            </a>
+          </div>
+
+          {/* Icons and Mobile Menu Toggle */}
+          <div className="flex items-center space-x-4">
+            <button className="text-gray-600 hover:text-pink-500 transition-colors hidden md:block">
+              <MagnifyingGlassIcon className="w-6 h-6" />
+            </button>
+            <button className="text-gray-600 hover:text-pink-500 transition-colors hidden md:block">
+              <ShoppingCartIcon className="w-6 h-6" />
+            </button>
+            <button
+              className="md:hidden text-gray-600 hover:text-pink-500 transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? (
+                <XMarkIcon className="w-7 h-7" />
+              ) : (
+                <Bars3Icon className="w-7 h-7" />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden bg-white/90 backdrop-blur-md py-4 shadow-lg"
+          >
+            <div className="flex flex-col items-center space-y-4">
+              <a
+                href="#"
+                className="text-gray-700 hover:text-pink-500 transition-colors font-medium text-lg"
+              >
+                Home
+              </a>
+              <a
+                href="#"
+                className="text-gray-700 hover:text-pink-500 transition-colors font-medium text-lg"
+              >
+                Products
+              </a>
+              <a
+                href="#"
+                className="text-gray-700 hover:text-pink-500 transition-colors font-medium text-lg"
+              >
+                Categories
+              </a>
+              <a
+                href="#"
+                className="text-gray-700 hover:text-pink-500 transition-colors font-medium text-lg"
+              >
+                About
+              </a>
+              <a
+                href="#"
+                className="text-gray-700 hover:text-pink-500 transition-colors font-medium text-lg"
+              >
+                Contact
+              </a>
+              <button className="text-gray-700 hover:text-pink-500 transition-colors flex items-center space-x-2">
+                <MagnifyingGlassIcon className="w-6 h-6" />
+                <span>Search</span>
+              </button>
+              <button className="text-gray-700 hover:text-pink-500 transition-colors flex items-center space-x-2">
+                <ShoppingCartIcon className="w-6 h-6" />
+                <span>Cart</span>
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </nav>
+
       {/* Floating decorative elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-40 h-40 rounded-full bg-purple-100 blur-3xl opacity-30"></div>
@@ -126,7 +260,7 @@ const Home = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="relative py-20 md:py-20 overflow-hidden">
+      <section className="relative py-20 md:py-44 overflow-hidden pt-32">
         <div className="absolute inset-0 bg-[url('/images/hero.png')] bg-cover bg-center bg-no-repeat opacity-48"></div>
         <div className="container mx-auto px-4">
           <motion.div
@@ -161,7 +295,7 @@ const Home = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative bg-pink-500 hover:from-pink-600 hover:to-cyan-700 text-white px-8 py-4 rounded-full font-medium flex items-center justify-center transition-all shadow-lg hover:shadow-xl"
+                className="relative bg-pink-500 hover:bg-pink-600 text-white px-8 py-4 rounded-full font-medium flex items-center justify-center transition-all shadow-lg hover:shadow-xl"
               >
                 <span className="relative z-10">Explore Products</span>
                 <ArrowRightIcon className="w-5 h-5 ml-2" />
