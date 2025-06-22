@@ -12,7 +12,6 @@ import {
   ShoppingCartIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/solid";
-import Image from "next/image";
 
 type ProductCategory = {
   id: number;
@@ -74,62 +73,63 @@ const Home = () => {
           name: "Face Serums",
           description: "Powerful formulations for radiant skin",
           image: "/images/face-serum.jpg",
-          slug: "face-serums",
+          slug: "Face-Serums",
         },
         {
           id: 2,
           name: "Face Creams",
           description: "Nourish and protect your skin",
           image: "/images/face-cream.jpg",
-          slug: "face-creams",
+          slug: "Face-Creams",
         },
         {
           id: 3,
           name: "Body Lotions",
           description: "Silky hydration for your body",
           image: "/images/body-lotion.jpg",
-          slug: "body-lotions",
+          slug: "Body-Lotions",
         },
         {
           id: 4,
           name: "Soaps",
           description: "Gentle cleansing for all skin types",
           image: "/images/soap.png",
-          slug: "soaps",
+          slug: "Soaps",
         },
       ];
 
       const products: Product[] = [
         {
           id: 1,
-          name: "Glow Renewal Serum",
-          price: 49.99,
-          category: "face-serums",
-          image: "/products/serum-1.jpg",
+          name: "Niacinamide Serum",
+          price: 1390.0,
+          category: "Face-Serums",
+          image: "images/products/niacinamide-serum.png",
           isBestSeller: true,
         },
         {
           id: 2,
-          name: "Hydra Plus Face Cream",
-          price: 39.99,
-          category: "face-creams",
-          image: "/products/cream-1.jpg",
+          name: "Natural Whitening Night Cream",
+          price: 1990.0,
+          category: "Face-Creams",
+          image: "images/products/whitening-cream.png",
           isBestSeller: true,
         },
         {
           id: 3,
-          name: "Silk Body Lotion",
-          price: 29.99,
-          category: "body-lotions",
-          image: "/products/lotion-1.jpg",
-          isBestSeller: false,
+          name: "Alpha Arbutin Serum",
+          price: 1390.0,
+          category: "Face-Serums",
+          image: "images/products/alpha-arbutin.png",
+          isBestSeller: true,
         },
+
         {
           id: 4,
-          name: "Botanical Cleansing Soap",
+          name: "Niacinamide Face & Body Cream",
           price: 12.99,
-          category: "soaps",
-          image: "/products/soap-1.jpg",
+          category: "Body-Lotions",
+          image: "images/products/niacinamide-lotion.png",
           isBestSeller: true,
         },
       ];
@@ -355,9 +355,10 @@ const Home = () => {
                 <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full"></span>
               </span>
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-              Each line is thoughtfully designed to work in harmony with your
-              skin&#39;s natural biology.
+            <p className="mt-6 text-gray-600 max-w-2xl mx-auto text-lg">
+              Indulge in premium skincare formulated with gentle, safe
+              ingredients where elegance meets efficacy for truly radiant
+              results.
             </p>
           </motion.div>
 
@@ -417,8 +418,8 @@ const Home = () => {
                 <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-amber-400 to-rose-500 rounded-full"></span>
               </span>
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-              Loved by thousands for their transformative results
+            <p className="mt-6 text-gray-600 max-w-2xl mx-auto text-lg">
+              Loved by thousands for their best results
             </p>
           </div>
 
@@ -430,12 +431,13 @@ const Home = () => {
                 className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all"
               >
                 <div className="relative">
-                  <div className="h-64 w-full bg-gray-100 relative overflow-hidden">
+                  <div className="h-64 w-full bg-white relative overflow-hidden">
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-contain hover:scale-105 transition-transform duration-500"
                     />
+
                     {product.isBestSeller && (
                       <div className="absolute top-3 left-3 bg-gradient-to-r from-amber-400 to-rose-500 text-white text-xs font-bold px-3 py-1 rounded-full flex items-center">
                         <StarIcon className="w-3 h-3 mr-1" />
@@ -443,18 +445,17 @@ const Home = () => {
                       </div>
                     )}
                   </div>
-                  <button className="absolute top-3 right-3 p-2 bg-white/80 backdrop-blur-sm rounded-full hover:bg-white transition-all">
-                    <HeartIcon className="w-5 h-5 text-rose-500" />
-                  </button>
                 </div>
                 <div className="p-5">
-                  <h3 className="font-bold text-lg mb-1">{product.name}</h3>
+                  <h3 className="font-bold text-black text-lg mb-1">
+                    {product.name}
+                  </h3>
                   <p className="text-gray-500 text-sm mb-3">
                     {product.category.replace("-", " ")}
                   </p>
                   <div className="flex justify-between items-center">
                     <span className="font-bold text-gray-900">
-                      ${product.price.toFixed(2)}
+                      Rs.{product.price.toFixed(2)}
                     </span>
                     <button className="text-sm font-medium bg-gray-900 text-white px-4 py-2 rounded-full hover:bg-gray-800 transition-all">
                       Add to Cart
