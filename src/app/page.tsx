@@ -466,6 +466,156 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Footer Section */}
+      <footer className="bg-gradient-to-br from-gray-900 to-gray-800 text-white pt-16 pb-8">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            {/* Brand Info */}
+            <div className="space-y-6">
+              <div className="flex items-center">
+                <img
+                  src="/images/olish-logo.png"
+                  alt="Olish Logo"
+                  width={40}
+                  height={40}
+                  className="object-contain"
+                />
+                <span className="ml-2 text-xl font-semibold">OLISH</span>
+              </div>
+              <p className="text-gray-300">
+                Premium skincare products crafted with natural ingredients for
+                radiant and healthy skin.
+              </p>
+              <div className="flex space-x-4">
+                <a
+                  href="#"
+                  className="w-10 h-10 rounded-full bg-gray-700 hover:bg-pink-500 flex items-center justify-center transition-colors"
+                  aria-label="Facebook"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z" />
+                  </svg>
+                </a>
+                <a
+                  href="#"
+                  className="w-10 h-10 rounded-full bg-gray-700 hover:bg-pink-500 flex items-center justify-center transition-colors"
+                  aria-label="Tiktok"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="currentColor"
+                    viewBox="0 0 448 512"
+                  >
+                    <path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z" />
+                  </svg>
+                </a>
+                <a
+                  href="#"
+                  className="w-10 h-10 rounded-full bg-gray-700 hover:bg-pink-500 flex items-center justify-center transition-colors"
+                  aria-label="Instagram"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div>
+              <h3 className="text-lg font-semibold mb-6 relative inline-block">
+                Quick Links
+                <span className="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-pink-500"></span>
+              </h3>
+              <ul className="space-y-3">
+                {["Home", "Products", "Categories", "About", "Contact"].map(
+                  (link) => (
+                    <li key={link}>
+                      <a
+                        href="#"
+                        className="text-gray-300 hover:text-pink-400 transition-colors"
+                      >
+                        {link}
+                      </a>
+                    </li>
+                  )
+                )}
+              </ul>
+            </div>
+
+            {/* Customer Service */}
+            <div>
+              <h3 className="text-lg font-semibold mb-6 relative inline-block">
+                Customer Service
+                <span className="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-pink-500"></span>
+              </h3>
+              <ul className="space-y-3">
+                {[
+                  "FAQs",
+                  "Shipping Policy",
+                  "Return Policy",
+                  "Privacy Policy",
+                  "Terms of Service",
+                ].map((item) => (
+                  <li key={item}>
+                    <a
+                      href="#"
+                      className="text-gray-300 hover:text-pink-400 transition-colors"
+                    >
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Newsletter */}
+            <div>
+              <h3 className="text-lg font-semibold mb-6 relative inline-block">
+                Newsletter
+                <span className="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-pink-500"></span>
+              </h3>
+              <p className="text-gray-300 mb-4">
+                Subscribe to get updates on new products and special offers.
+              </p>
+              <form className="space-y-3">
+                <input
+                  type="email"
+                  placeholder="Your email address"
+                  className="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-pink-500 text-white"
+                  required
+                />
+                <button
+                  type="submit"
+                  className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-medium py-3 px-6 rounded-lg transition-all shadow-lg hover:shadow-xl"
+                >
+                  Subscribe
+                </button>
+              </form>
+            </div>
+          </div>
+
+          {/* Copyright */}
+          <div className="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p className="text-gray-400 text-sm">
+              © {new Date().getFullYear()} Olish Beauty Care & Cosmetics Pvt
+              Ltd. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
