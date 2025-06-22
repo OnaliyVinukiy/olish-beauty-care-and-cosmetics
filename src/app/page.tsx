@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import {
   ArrowRightIcon,
-  HeartIcon,
   StarIcon,
   Bars3Icon,
   XMarkIcon,
