@@ -3,14 +3,8 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import {
-  ArrowRightIcon,
-  StarIcon,
-  Bars3Icon,
-  XMarkIcon,
-  ShoppingCartIcon,
-  MagnifyingGlassIcon,
-} from "@heroicons/react/24/solid";
+import { ArrowRightIcon, StarIcon } from "@heroicons/react/24/solid";
+import { useCart } from "./context/CartContext";
 
 type ProductCategory = {
   id: number;
@@ -33,8 +27,8 @@ const Home = () => {
   const [categories, setCategories] = useState<ProductCategory[]>([]);
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileView, setIsMobileView] = useState(false);
+  const { addToCart } = useCart();
 
   // Animation hooks
   const [heroRef, heroInView] = useInView({
@@ -148,130 +142,6 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation Bar */}
-      <nav className="fixed w-full top-0 z-50 bg-white/80 backdrop-blur-md shadow-sm">
-        <div className="container mx-auto px-2 py-3 flex justify-between items-center">
-          {/* Logo */}
-          <a href="#" className="flex items-center">
-            <img
-              src="/images/olish-logo.png"
-              alt="Olish Logo"
-              width={40}
-              height={40}
-              className="object-contain"
-            />
-            <span className="ml-2 text-xl font-semibold text-gray-800">
-              OLISH
-            </span>
-          </a>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-6">
-            <a
-              href="#"
-              className="text-gray-600 hover:text-pink-500 transition-colors font-medium"
-            >
-              Home
-            </a>
-            <a
-              href="#"
-              className="text-gray-600 hover:text-pink-500 transition-colors font-medium"
-            >
-              Products
-            </a>
-            <a
-              href="#"
-              className="text-gray-600 hover:text-pink-500 transition-colors font-medium"
-            >
-              Categories
-            </a>
-            <a
-              href="#"
-              className="text-gray-600 hover:text-pink-500 transition-colors font-medium"
-            >
-              About
-            </a>
-            <a
-              href="#"
-              className="text-gray-600 hover:text-pink-500 transition-colors font-medium"
-            >
-              Contact
-            </a>
-          </div>
-
-          {/* Icons and Mobile Menu Toggle */}
-          <div className="flex items-center space-x-4">
-            <button className="text-gray-600 hover:text-pink-500 transition-colors hidden md:block">
-              <MagnifyingGlassIcon className="w-6 h-6" />
-            </button>
-            <button className="text-gray-600 hover:text-pink-500 transition-colors hidden md:block">
-              <ShoppingCartIcon className="w-6 h-6" />
-            </button>
-            <button
-              className="md:hidden text-gray-600 hover:text-pink-500 transition-colors"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              {isMobileMenuOpen ? (
-                <XMarkIcon className="w-7 h-7" />
-              ) : (
-                <Bars3Icon className="w-7 h-7" />
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden bg-white/90 backdrop-blur-md py-4 shadow-lg"
-          >
-            <div className="flex flex-col items-center space-y-4">
-              <a
-                href="#"
-                className="text-gray-700 hover:text-pink-500 transition-colors font-medium text-lg"
-              >
-                Home
-              </a>
-              <a
-                href="#"
-                className="text-gray-700 hover:text-pink-500 transition-colors font-medium text-lg"
-              >
-                Products
-              </a>
-              <a
-                href="#"
-                className="text-gray-700 hover:text-pink-500 transition-colors font-medium text-lg"
-              >
-                Categories
-              </a>
-              <a
-                href="#"
-                className="text-gray-700 hover:text-pink-500 transition-colors font-medium text-lg"
-              >
-                About
-              </a>
-              <a
-                href="#"
-                className="text-gray-700 hover:text-pink-500 transition-colors font-medium text-lg"
-              >
-                Contact
-              </a>
-              <button className="text-gray-700 hover:text-pink-500 transition-colors flex items-center space-x-2">
-                <MagnifyingGlassIcon className="w-6 h-6" />
-                <span>Search</span>
-              </button>
-              <button className="text-gray-700 hover:text-pink-500 transition-colors flex items-center space-x-2">
-                <ShoppingCartIcon className="w-6 h-6" />
-                <span>Cart</span>
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </nav>
 
       {/* Floating decorative elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
@@ -456,7 +326,10 @@ const Home = () => {
                     <span className="font-bold text-gray-900">
                       Rs.{product.price.toFixed(2)}
                     </span>
-                    <button className="text-sm font-medium bg-gray-900 text-white px-4 py-2 rounded-full hover:bg-gray-800 transition-all">
+                    <button
+                      onClick={() => addToCart(product)}
+                      className="text-sm font-medium bg-gray-900 text-white px-4 py-2 rounded-full hover:bg-gray-800 transition-all"
+                    >
                       Add to Cart
                     </button>
                   </div>
